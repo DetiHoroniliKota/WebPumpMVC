@@ -9,11 +9,19 @@ namespace WebPumpMVC.Data
 {
     public class WebPumpMVCContext : DbContext
     {
+        public WebPumpMVCContext()
+        {
+        }
+
         public WebPumpMVCContext (DbContextOptions<WebPumpMVCContext> options)
             : base(options)
         {
         }
 
         public DbSet<WebPumpMVC.Models.Pump> Pump { get; set; } = default!;
+        public DbSet<WebPumpMVC.Models.Rope> Rope { get; set; } = default!;
+        public DbSet<WebPumpMVC.Models.Login> Login { get; set; } = default!;
+
+
     }
 }

@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<WebPumpMVC.Models.Pump>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "downhole pump selection";
 }
 
-<h1>Index</h1>
+<h1>Downhole pump selectionh</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
-<form asp-controller="Pumps" asp-action="Index" method="get" >
+
+<form asp-controller="Pumps" asp-action="Search">
     <p>
-        Title: <input type="text" name="SearchString" />
+        Установочная глубина насоса:    <input type="number" name="Ha" /> <br>
+        Расстояние от скважины до дома: <input type="number" name="Hb" /> <br>
+        Наивысшая точка водоразбора:    <input type="number" name="Hc" /> <br>
+        Дебет скважины:                 <input type="number" name="volume" /> <br>
         <input type="submit" value="Filter" />
     </p>
 </form>
@@ -60,7 +61,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
+             <td>
                 @Html.DisplayFor(modelItem => item.Typ)
             </td>
             <td>

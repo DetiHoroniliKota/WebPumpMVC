@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<h1>@ViewData["RopeTitle"]</h1>
+<h2>Equipment</h2>
+
+
+
+
+<form asp-controller="Equipment" asp-action="index">
+    <p>
+         Модель насоса :    <input type="text" name="Np" /> <br>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
