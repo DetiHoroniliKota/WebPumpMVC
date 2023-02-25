@@ -10,16 +10,16 @@ using WebPumpMVC.Models;
 
 namespace WebPumpMVC.Controllers
 {
-    
-    
-        public class EquipmentController : Controller
-        {
-            private readonly WebPumpMVCContext _context;
 
-            public EquipmentController(WebPumpMVCContext context)
-            {
-                _context = context;
-            }
+
+    public class EquipmentController : Controller
+    {
+        private readonly WebPumpMVCContext _context;
+
+        public EquipmentController(WebPumpMVCContext context)
+        {
+            _context = context;
+        }
 
         public async Task<IActionResult> Index(string searchString)
         {
@@ -28,60 +28,38 @@ namespace WebPumpMVC.Controllers
                 return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
             }
 
+
             var pumps = from m in _context.Pump
+                        select m;
+
+            var ropes = from m in _context.Rope
                         select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                pumps = pumps.Where(s => s.Title!.Contains(searchString));
+                pumps = pumps.Where(s => s.Title == searchString);
             }
 
-            return View(await pumps.ToListAsync());
-        }
+            Pump pump = (Pump)pumps;
 
 
-
-        public async Task<IActionResult> Equip(string np)
+            if (pump.H >= 1 && pump.H <= 60 && pump.Typ == "downhole")
             {
-
-                if (np == null || _context.Pump == null)
-                {
-                    return NotFound();
-                }
-
-                var pump = await _context.Pump
-                    .FirstOrDefaultAsync(m => m.Title == np);
-                if (pump == null)
-                {
-                    return NotFound();
-                }
-
-
-                var rope = new Rope();
-                
-                if (pump.H < 50)
-                {
-                     rope = _context.Rope.FirstOrDefault(r => r.Diameter == 3);
-                }
-
-                else if (pump.H >= 50 && pump.H >= 120 )
-                {
-                     rope = _context.Rope.FirstOrDefault(r => r.Diameter == 4);
-                }
-
-                else 
-                {
-                     rope = _context.Rope.FirstOrDefault(r => r.Diameter == 5);
-                }
-                
-                ViewData["RopeTitle"] = rope;
-               
-                return View();
-               
+                ropes = ropes.Where(s => s.Diameter == 3);
             }
 
+            Rope rope = (Rope)ropes;
+
+            var selectionEquip = new SelectiomOfEquipment
+            {
+                Ropes = rope,
+                Pumps = (List<Pump>)pumps.Where(s => s.Title == searchString)
+
+            };
+            return View(selectionEquip);
         }
 
-    
+    }
+          
 }
 

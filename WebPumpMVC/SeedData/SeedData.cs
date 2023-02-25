@@ -3,8 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using WebPumpMVC.Data;
 using System;
 using System.Linq;
+using WebPumpMVC.Models;
 
-namespace WebPumpMVC.Models;
+namespace WebPumpMVC.SeedData;
 
 public static class SeedData
 {
@@ -56,7 +57,7 @@ public static class SeedData
                     Price = 80000,
                     Typ = "downhole"
                 }
-            ) ;
+            );
             context.SaveChanges();
         }
     }

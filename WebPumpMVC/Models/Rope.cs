@@ -9,5 +9,10 @@
         public int Diameter { get; set; }
 
         public decimal Price { get; set; }
+
+        public static implicit operator List<object>(Rope v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
