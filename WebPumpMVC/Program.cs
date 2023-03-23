@@ -24,6 +24,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+//ƒобавление инициализатора заполнени€
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

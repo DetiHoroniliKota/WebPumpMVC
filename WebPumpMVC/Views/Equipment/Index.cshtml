@@ -1,10 +1,8 @@
 ﻿@using WebPumpMVC.Data
 
-@model IEnumerable<WebPumpMVC.Models.Pump>
+@model WebPumpMVC.Models.SelectiomOfEquipment
 
-    
-
-
+   
 @{
     ViewData["Title"] = "Index";
 }
@@ -26,28 +24,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Pumps)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.H)
+                @Html.DisplayNameFor(model => model.Ropes)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Typ)
-            </th>
-            <th></th>
+           
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+  @foreach (var item in Model.Pumps) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.H )
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Typ )
             </td>
             
             <td>
@@ -56,7 +45,22 @@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+
+            @foreach (var item1 in Model.Pumps)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.Title)
+                    </td>
+                    
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+    }
     </tbody>
 </table>
 

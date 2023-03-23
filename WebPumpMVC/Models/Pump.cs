@@ -15,7 +15,7 @@ namespace WebPumpMVC.Models
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
-        
+       
         [Range(1, 200)]
         public int H { get; set; }
 
@@ -25,5 +25,7 @@ namespace WebPumpMVC.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
         public string? Typ { get; set; }
+
+        public ICollection<Equipment>? Equipments { get; set; }
     }
 }

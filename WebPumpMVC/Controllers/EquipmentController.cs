@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebPumpMVC.Data;
 using WebPumpMVC.Models;
+using System.Text.Encodings.Web;
+
+
 
 namespace WebPumpMVC.Controllers
 {
@@ -21,7 +24,7 @@ namespace WebPumpMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString)
+       /* public async Task<IActionResult> Index(string searchString)
         {
             if (_context.Pump == null)
             {
@@ -37,29 +40,42 @@ namespace WebPumpMVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                pumps = pumps.Where(s => s.Title == searchString);
+                pumps = pumps.Where(s => s.Title!.Contains(searchString));
+                var selection = _context.Select(s => new SelectiomOfEquipment 
+                {Ropes = s._context.Ropes, Pumps = s._context.Pumps }); 
             }
 
-            Pump pump = (Pump)pumps;
 
-
-            if (pump.H >= 1 && pump.H <= 60 && pump.Typ == "downhole")
+            SelectiomOfEquipment EqipmentModel = new SelectiomOfEquipment
             {
-                ropes = ropes.Where(s => s.Diameter == 3);
-            }
-
-            Rope rope = (Rope)ropes;
-
-            var selectionEquip = new SelectiomOfEquipment
-            {
-                Ropes = rope,
-                Pumps = (List<Pump>)pumps.Where(s => s.Title == searchString)
+                Pumps = (List<Pump>)pumps,
+                Ropes = (List<Rope>)ropes
 
             };
-            return View(selectionEquip);
+            return View(EqipmentModel);
+        }*/
+        public IActionResult Some(string searchString)
+        {
+            var pump = _context.Pump.Where(s => s.Title!.Contains(searchString));
+            ViewData["PumpTitle"] = pump;
+            
+            Pump pumpH = (Pump)pump;
+            
+            if (pumpH.H >= 0 && pumpH.H <= 80)
+            {
+                ViewData["RopeTitle"] = _context.Rope.Where(s => s.Diameter == 3);
+            }
+            else 
+            {
+                ViewData["RopeTitle"] = _context.Rope.Where(s => s.Diameter == 4);
+            }
+            
+
+
+            return View();
         }
 
     }
-          
+    
 }
 
