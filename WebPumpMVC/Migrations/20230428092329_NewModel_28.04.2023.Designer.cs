@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebPumpMVC.Data;
 
@@ -11,9 +12,10 @@ using WebPumpMVC.Data;
 namespace WebPumpMVC.Migrations
 {
     [DbContext(typeof(WebPumpMVCContext))]
-    partial class WebPumpMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20230428092329_NewModel_28.04.2023")]
+    partial class NewModel_28042023
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
