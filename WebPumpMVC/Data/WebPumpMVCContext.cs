@@ -27,7 +27,7 @@ namespace WebPumpMVC.Data
         public DbSet<WebPumpMVC.Models.Cap> Cap { get; set; } = default!;
         public DbSet<WebPumpMVC.Models.UnderwaterСable> UnderwaterСable { get; set; } = default!;
         public DbSet<WebPumpMVC.Models.Automation> Automation { get; set; } = default!;
-        public DbSet<WebPumpMVC.Models.Equipment> Equipment { get; set; } = default!;
+        public DbSet<WebPumpMVC.Models.Order> Equipment { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,7 @@ namespace WebPumpMVC.Data
             modelBuilder.Entity<Cap>().ToTable("Cap");
             modelBuilder.Entity<UnderwaterСable>().ToTable("UnderwaterСable");
             modelBuilder.Entity<Automation>().ToTable("Automation");
-            modelBuilder.Entity<Equipment>().ToTable("Equipment");
+            modelBuilder.Entity<Order>().ToTable("Equipment");
         }
 
     }

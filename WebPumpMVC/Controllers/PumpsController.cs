@@ -150,7 +150,7 @@ namespace WebPumpMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,H,Q,Price,Typ,Equipment")] Pump pump)
+        public async Task<IActionResult> Create([Bind("Id,Title,H,Q,Price,Typ,Equipment")] Pump pump)
         {
             if (ModelState.IsValid)
             {
@@ -182,7 +182,7 @@ namespace WebPumpMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,H,Q,Price,Typ,Equipment")] Pump pump)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,H,Q,Price,Typ,Equipment")] Pump pump)
         {
             if (id != pump.Id)
             {

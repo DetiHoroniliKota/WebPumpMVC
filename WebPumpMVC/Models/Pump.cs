@@ -2,19 +2,22 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace WebPumpMVC.Models
 {
     public class Pump
     {
+        /*[DatabaseGenerated(DatabaseGeneratedOption.None)]*/
         public int Id { get; set; }
 
-        [StringLength(60, MinimumLength = 3)]
+        [StringLength(60)]
+        
         [Required]
         public string? Title { get; set; }
 
-        [Display(Name = "Release Date")]
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+        //[Display(Name = "Release Date")]
+        //[DataType(DataType.Date)]
+        //public DateTime ReleaseDate { get; set; }
        
         [Range(1, 200)]
         public int H { get; set; }
@@ -26,6 +29,7 @@ namespace WebPumpMVC.Models
         public decimal Price { get; set; }
         public string? Typ { get; set; }
 
-        public ICollection<Equipment>? Equipments { get; set; }
+        
+        public Order? Order { get; set; }
     }
 }

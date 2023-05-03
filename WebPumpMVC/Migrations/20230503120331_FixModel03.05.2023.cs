@@ -4,21 +4,10 @@
 
 namespace WebPumpMVC.Migrations
 {
-    public partial class NewModel_28042023 : Migration
+    public partial class FixModel03052023 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Pump",
-                type: "nvarchar(60)",
-                maxLength: 60,
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
-
             migrationBuilder.CreateTable(
                 name: "Automation",
                 columns: table => new
@@ -111,6 +100,23 @@ namespace WebPumpMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pump",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    H = table.Column<int>(type: "int", nullable: false),
+                    Q = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Typ = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pump", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rope",
                 columns: table => new
                 {
@@ -146,15 +152,22 @@ namespace WebPumpMVC.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PumpsId = table.Column<int>(type: "int", nullable: false),
+                    PumpsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RopeTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HydraulicAccumulatorTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClampTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PipeTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CapTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnderwaterСableTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutomationTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PumpId = table.Column<int>(type: "int", nullable: false),
                     RopeId = table.Column<int>(type: "int", nullable: false),
                     HydraulicAccumulatorId = table.Column<int>(type: "int", nullable: false),
                     ClampId = table.Column<int>(type: "int", nullable: false),
                     PipeId = table.Column<int>(type: "int", nullable: false),
-                    CapId = table.Column<int>(type: "int", nullable: false),
+                    Capid = table.Column<int>(type: "int", nullable: false),
                     UnderwaterСableId = table.Column<int>(type: "int", nullable: false),
-                    AutomationId = table.Column<int>(type: "int", nullable: false),
-                    PumpId = table.Column<int>(type: "int", nullable: false)
+                    AutomationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,8 +179,8 @@ namespace WebPumpMVC.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Equipment_Cap_CapId",
-                        column: x => x.CapId,
+                        name: "FK_Equipment_Cap_Capid",
+                        column: x => x.Capid,
                         principalTable: "Cap",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -212,42 +225,50 @@ namespace WebPumpMVC.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_AutomationId",
                 table: "Equipment",
-                column: "AutomationId");
+                column: "AutomationId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipment_CapId",
+                name: "IX_Equipment_Capid",
                 table: "Equipment",
-                column: "CapId");
+                column: "Capid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_ClampId",
                 table: "Equipment",
-                column: "ClampId");
+                column: "ClampId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_HydraulicAccumulatorId",
                 table: "Equipment",
-                column: "HydraulicAccumulatorId");
+                column: "HydraulicAccumulatorId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_PipeId",
                 table: "Equipment",
-                column: "PipeId");
+                column: "PipeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_PumpId",
                 table: "Equipment",
-                column: "PumpId");
+                column: "PumpId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_RopeId",
                 table: "Equipment",
-                column: "RopeId");
+                column: "RopeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_UnderwaterСableId",
                 table: "Equipment",
-                column: "UnderwaterСableId");
+                column: "UnderwaterСableId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -274,19 +295,13 @@ namespace WebPumpMVC.Migrations
                 name: "Pipe");
 
             migrationBuilder.DropTable(
+                name: "Pump");
+
+            migrationBuilder.DropTable(
                 name: "Rope");
 
             migrationBuilder.DropTable(
                 name: "UnderwaterСable");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Title",
-                table: "Pump",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(60)",
-                oldMaxLength: 60);
         }
     }
 }

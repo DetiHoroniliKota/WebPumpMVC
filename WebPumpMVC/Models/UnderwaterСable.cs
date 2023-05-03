@@ -7,6 +7,7 @@
         public double Section { get; set; }
         public decimal Price { get; set; }
 
-        public ICollection<Equipment> Equipments { get; set; }
+        
+        public Order? Order { get; set; }
     }
 }
