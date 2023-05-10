@@ -26,7 +26,7 @@ namespace WebPumpMVC.Controllers
         }
 
         // GET: Pumps
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Index(string searchString)
         {
             if (_context.Pump == null)

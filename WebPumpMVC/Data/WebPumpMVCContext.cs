@@ -27,7 +27,7 @@ namespace WebPumpMVC.Data
         public DbSet<WebPumpMVC.Models.Cap> Cap { get; set; } = default!;
         public DbSet<WebPumpMVC.Models.UnderwaterСable> UnderwaterСable { get; set; } = default!;
         public DbSet<WebPumpMVC.Models.Automation> Automation { get; set; } = default!;
-        public DbSet<WebPumpMVC.Models.Order> Equipment { get; set; } = default!;
+        public DbSet<WebPumpMVC.Models.Order> Order { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

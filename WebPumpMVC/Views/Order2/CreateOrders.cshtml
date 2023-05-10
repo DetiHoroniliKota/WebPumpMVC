@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebPumpMVC.Models.Order>
+@{
+    ViewData["Title"] = "Order";
+}
+
+<h1>Заказ</h1>
+<form asp-controller = "Order2" asp-action = "CreateOrders" method="get">
+    <p>
+        Title : <input type = "text" name="SearchString"/>
+                <input type = "sumbit" value="Order" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model=>model.Pump.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Automation.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HydraulicAccumulator.Title)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model){
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Pump.Title)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Automation.Title)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.HydraulicAccumulator.Title)
+            </th>
+        </tr>
+
+        }
+    </tbody>
+</table>
